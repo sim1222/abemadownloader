@@ -55,4 +55,6 @@ echo %ep%
 del %EPTEXT%
 echo %ep% >> %EPTEXT%
 
+set EPTITLE=%TITLE%第%ep%話
 
+wsl curl -H "Content-Type: application/json" -X POST -d '{"content": "ダウンロードが完了しました。\n%EPTITLE%"}' https://discord.com/api/webhooks/
