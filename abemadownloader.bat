@@ -13,10 +13,16 @@ echo.
 
 echo %1
 echo %2
+
 set EPTEXT=%1.txt
-if not exist %EPTEXT% echo 1 > %EPTEXT%
-for /f %%a in (%EPTEXT%) do (
-  set ep=%%a
+if "%3" EQU "" (
+  if not exist %EPTEXT% echo 1 > %EPTEXT%
+  for /f %%a in (%EPTEXT%) do (
+    set ep=%%a
+  )
+) else (
+  echo %3
+  set ep=%3
 )
 
 set URL=https://abema.tv/video/episode/%1%ep%
@@ -50,10 +56,12 @@ echo ダウンロード開始
 streamlink %URL% best -o %TS%
 ffmpeg -i %TS% -c:v copy -c:a copy %MP4% && del %TS%
 
-set /a ep+=1
-echo %ep%
-del %EPTEXT%
-echo %ep% >> %EPTEXT%
+if "%3" EQU "" (
+  set /a ep+=1
+  echo %ep%
+  del %EPTEXT%
+  echo %ep% >> %EPTEXT%
+)
 
 set EPTITLE=%TITLE%第%ep%話
 
