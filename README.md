@@ -1,9 +1,10 @@
 # abemadownloader
 Running on Windows
-<br>
-***
-Require
 
+## Require
 - Streamlink
 - ffmpeg
 - wsl(bash)
+
+## Usage
+```abemadownloader.bat <??-??_s?_p> <outdir>```
