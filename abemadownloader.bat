@@ -57,11 +57,10 @@ streamlink %URL% best -o %TS%
 ffmpeg -i %TS% -c:v copy -c:a copy %MP4% && del %TS%
 
 if "%3" EQU "" (
-  set /a ep+=1
-  set nextep=%ep%
-  echo %nextep%
+  set /a nextep=%ep%+1
+  echo !nextep!
   del %EPTEXT%
-  echo %nextep% >> %EPTEXT%
+  echo !nextep! >> %EPTEXT%
 )
 
 set EPTITLE=%TITLE%第%ep%話
