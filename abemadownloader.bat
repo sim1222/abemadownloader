@@ -12,7 +12,7 @@ echo 引数2には保存先フォルダ名を入力してください
 echo.
 
 echo %1
-echo %2
+echo %~2
 
 set EPTEXT=%1.txt
 if "%3" EQU "" (
@@ -39,8 +39,8 @@ echo.
 
 set ABEMATITLE= (アニメ) ^| 無料動画・見逃し配信を見るなら ^| ABEMA
 for /f "usebackq delims=" %%b in (`"wsl curl -s %TITLEURL% ^| grep -o '^<title^>.*^</title^>' ^| sed 's#^<title^>\(.*\)^</title^>#\1#' ^| sed  -e 's/(アニメ) ^| 無料動画・見逃し配信を見るなら ^| ABEMA//'"`) do set TITLE=%%b
-set TS="%2\%TITLE%第%ep%話.ts"
-set MP4="%2\%TITLE%第%ep%話.mp4"
+set TS="%~2\%TITLE%第%ep%話.ts"
+set MP4="%~2\%TITLE%第%ep%話.mp4"
 echo 番組名 : %TITLE%
 echo.
 echo TS保存先 : %TS%
@@ -65,4 +65,4 @@ if "%3" EQU "" (
 
 set EPTITLE=%TITLE%第%ep%話
 
-wsl curl -H "Content-Type: application/json" -X POST -d '{"content": "ダウンロードが完了しました。\n%EPTITLE%"}' https://discord.com/api/webhooks/
+wsl curl -H "Content-Type: application/json" -X POST -d '{"content": "ダウンロードが完了しました。\n%EPTITLE%"}' https://discord.com/api/webhooks/858715880874311700/sj6hvXmwYWidUsIQkz6FHTClsKDVgx7BbGBKTcGWoBBIrFrg9jWYZmV5YK9-8e-tBbKk
